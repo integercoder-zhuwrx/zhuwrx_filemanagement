@@ -1,0 +1,5 @@
+Eine Gleitkommazahl (auch Fließkommazahl genannt) ist eine angenäherte Darstellung einer reellen Zahl.
+
+Die Menge der Gleitkommazahlen ist eine Teilmenge der rationalen Zahlen. Zusammen mit den auf ihnen definierten Operationen (Gleitkommaarithmetik) bilden die Gleitkommazahlen eine endliche Arithmetik, die vor allem im Hinblick auf numerische Berechnungen mit (binären) Rechnern entwickelt wurde.
+
+(siehe Wikipedia)
