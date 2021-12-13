@@ -55,6 +55,23 @@ class IntArrayListBuilder extends ListBuilder<Integer> {
     }
 }
 
+class DoubleArrayListBuilder extends ListBuilder<Double> {
+    private double[] array;
+
+    public DoubleArrayListBuilder(double[] array) {
+        this.array = array;
+    }
+
+    @Override
+    public List<Double> buildList() {
+        List<Double> list = new ArrayList<>();
+        for (double element : array) {
+            list.add(element);
+        }
+        return list;
+    }
+}
+
 class StringListBuilder extends ListBuilder<Character> {
     private String text;
 
@@ -114,6 +131,12 @@ public class ListDisplayer<T> {
                                               String elementLabel,
                                               String indexLabel) {
         return new ListDisplayer<Integer>(new IntArrayListBuilder(array), elementLabel, indexLabel);
+    }
+
+    public static ListDisplayer<Double> from(double[] array,
+                                             String elementLabel,
+                                             String indexLabel) {
+        return new ListDisplayer<Double>(new DoubleArrayListBuilder(array), elementLabel, indexLabel);
     }
 
     public void setPad(String pad) {
@@ -192,7 +215,7 @@ public class ListDisplayer<T> {
             String text = elementToString(element);
             String formattedElement =
                     elementMinLength > 0
-                            ? String.format("%" + text + "s", element)
+                            ? String.format("%" + -elementMinLength + "s", text)
                             : String.format("%s", text);
             formattedElement = pad + formattedElement + pad;
             int formattedElementLength = formattedElement.length();
@@ -217,7 +240,7 @@ public class ListDisplayer<T> {
     private String elementToString(Object element) {
         if (element instanceof String) {
             return "\"" + element + "\"";
-        } else if (element instanceof  Character) {
+        } else if (element instanceof Character) {
             return "'" + element + "'";
         } else {
             return String.valueOf(element);

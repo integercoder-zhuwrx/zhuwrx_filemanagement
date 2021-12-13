@@ -3,17 +3,58 @@ package filemanagement;
 import java.util.StringJoiner;
 
 public class FractionConverter {
-    public double[] parseToDouble(String a) {
-        String[] fractionTexts = a.split(";");
-        int valueCount = fractionTexts.length;
-        double[] values = new double[valueCount];
-        for (int i = 0; i < valueCount; i++) {
-            String[] numbers = fractionTexts[i].split("/");
-            int numerator = Integer.parseInt(numbers[0]);
-            int denominator = Integer.parseInt(numbers[1]);
-            values[i] = (double) numerator / denominator;
+    //                              e.g. text => "-1/2;5/4;-171/50;0/1"
+    public double[] parseToDouble(String text) {
+        // text  █'-'█'1'█'/'█'2'█';'█'5'█'/'█'4'█';'█'-'█'1'█'7'█'1'█'/'█'5'█'0'█';'█'0'█'/'█'1'█
+        //       ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑
+        //       0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20
+
+        String[] fractions = text.split(";");
+        // fractions  █"-1/2"   █"5/4"    █"-171/50"█"0/1"    █
+        //            ↑         ↑         ↑         ↑         ↑
+        //            0         1         2         3         4
+
+        //                           fractions.length => 4
+        double[] values = new double[fractions.length];
+
+        //                  fractions.length => 4
+        for (int i = 0; i < fractions.length; i++) {
+            //                           fractions[0] => "-1/2"
+            //                           fractions[1] => "5/4"
+            //                           fractions[2] => "-171/50"
+            //                           fractions[3] => "0/1"
+            values[i] = fractionToDouble(fractions[i]);
         }
+
+        //    values  █-0.5     █1.25     █-3.42    █0.0      █
+        //            ↑         ↑         ↑         ↑         ↑
+        //            0         1         2         3         4
         return values;
+    }
+
+    //                               e.g. fraction => "-171/50"
+    public double fractionToDouble(String fraction) {
+        // fraction  █'-'█'1'█'7'█'1'█'/'█'5'█'0'█
+        //           ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑
+        //           0   1   2   3   4   5   6   7
+
+        String[] parts = fraction.split("/");
+        // parts  █"-171"█"50"█
+        //        ↑      ↑    ↑
+        //        0      1    2
+
+        //                               parts[0] => "-171"
+        //  numerator => -171
+        int numerator = Integer.parseInt(parts[0]);
+
+        //                                 parts[1] => "50"
+        //  denominator => 50
+        int denominator = Integer.parseInt(parts[1]);
+
+        //     (double) numerator => -171.0
+        //     (double) numerator / denominator => -171.0 / 50
+        //                                      => -3.42
+        return (double) numerator / denominator;
     }
 
     public String parseToString(double[] values) {
