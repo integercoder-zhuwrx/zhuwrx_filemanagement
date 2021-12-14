@@ -3,6 +3,32 @@ package filemanagement;
 import java.util.StringJoiner;
 
 public class FractionConverter {
+    public static void main(String[] args) {
+        String command = args[0];
+        if (command.equals("parseDouble")) {
+            String inputText = args[1];
+            double[] values = extractDoubles(inputText);
+            String outputText = parseToString(values);
+            System.out.println(outputText);
+        } else if (command.equals("parseString")) {
+            String inputText = args[1];
+            double[] values = parseToDouble(inputText);
+            for (double value : values) {
+                System.out.println(value);
+            }
+        }
+    }
+
+    public static double[] extractDoubles(String text) {
+        String[] segments = text.split(" ");
+        double[] values = new double[segments.length];
+        for (int i = 0; i < segments.length; i++) {
+            String segment = segments[i];
+            values[i] = Double.parseDouble(segment);
+        }
+        return values;
+    }
+
     //                                     e.g. text => "-1/2;5/4;-171/50;0/1"
     public static double[] parseToDouble(String text) {
         // text  █'-'█'1'█'/'█'2'█';'█'5'█'/'█'4'█';'█'-'█'1'█'7'█'1'█'/'█'5'█'0'█';'█'0'█'/'█'1'█
