@@ -3,8 +3,8 @@ package filemanagement;
 import java.util.StringJoiner;
 
 public class FractionConverter {
-    //                              e.g. text => "-1/2;5/4;-171/50;0/1"
-    public double[] parseToDouble(String text) {
+    //                                     e.g. text => "-1/2;5/4;-171/50;0/1"
+    public static double[] parseToDouble(String text) {
         // text  █'-'█'1'█'/'█'2'█';'█'5'█'/'█'4'█';'█'-'█'1'█'7'█'1'█'/'█'5'█'0'█';'█'0'█'/'█'1'█
         //       ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑
         //       0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20
@@ -32,8 +32,8 @@ public class FractionConverter {
         return values;
     }
 
-    //                               e.g. fraction => "-171/50"
-    public double fractionToDouble(String fraction) {
+    //                                      e.g. fraction => "-171/50"
+    public static double fractionToDouble(String fraction) {
         // fraction  █'-'█'1'█'7'█'1'█'/'█'5'█'0'█
         //           ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑
         //           0   1   2   3   4   5   6   7
@@ -57,7 +57,7 @@ public class FractionConverter {
         return (double) numerator / denominator;
     }
 
-    public String parseToString(double[] values) {
+    public static String parseToString(double[] values) {
         StringJoiner sj = new StringJoiner(";");
         for (double value : values) {
             String fraction = doubleToFraction(value);
@@ -66,8 +66,8 @@ public class FractionConverter {
         return sj.toString();
     }
 
-    //                               e.g. value => -3.42
-    public String doubleToFraction(double value) {
+    //                                      e.g. value => -3.42
+    public static String doubleToFraction(double value) {
         //     valueText => "-3.42"
         String valueText = Double.toString(value);
         //     valueText  █'-'█'3'█'.'█'4'█'2'█
@@ -111,7 +111,7 @@ public class FractionConverter {
         return numerator + "/" + denominator;
     }
 
-    public int gcd(int a, int b) {
+    public static int gcd(int a, int b) {
         a = Math.abs(a);
         b = Math.abs(b);
         if (b == 0) return a;
